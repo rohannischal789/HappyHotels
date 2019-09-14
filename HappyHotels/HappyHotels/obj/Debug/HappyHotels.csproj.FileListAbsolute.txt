@@ -98,7 +98,6 @@ C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\b
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.csprojAssemblyReference.cache
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.csproj.CoreCompileInputs.cache
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.csproj.CopyComplete
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.dll
