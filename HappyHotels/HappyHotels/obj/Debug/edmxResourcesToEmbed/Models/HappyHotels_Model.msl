@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="HappyHotelsEntities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
     <EntitySetMapping Name="Amenities">
       <EntityTypeMapping TypeName="Model.Amenity">
         <MappingFragment StoreEntitySet="Amenity">
@@ -46,7 +46,6 @@
           <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="country" ColumnName="country" />
           <ScalarProperty Name="postcode" ColumnName="postcode" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="check_in_time" ColumnName="check_in_time" />
           <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
           <ScalarProperty Name="lattitude" ColumnName="lattitude" />

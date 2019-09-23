@@ -48,12 +48,11 @@
           <Property Name="state" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="country" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="postcode" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="check_in_time" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="check_out_time" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="lattitude" Type="decimal" Precision="10" Scale="6" Nullable="false" />
-          <Property Name="longitude" Type="decimal" Precision="10" Scale="6" Nullable="false" />
-          <Property Name="rating" Type="int" Nullable="false" />
+          <Property Name="lattitude" Type="decimal" Precision="10" Scale="6" />
+          <Property Name="longitude" Type="decimal" Precision="10" Scale="6" />
+          <Property Name="rating" Type="int" />
         </EntityType>
         <EntityType Name="HotelAmenities">
           <Key>
@@ -381,12 +380,11 @@
           <Property Name="state" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="postcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="check_in_time" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="check_out_time" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="lattitude" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
-          <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
-          <Property Name="rating" Type="Int32" Nullable="false" />
+          <Property Name="lattitude" Type="Decimal" Precision="10" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" />
+          <Property Name="rating" Type="Int32" />
           <NavigationProperty Name="Coupons" Relationship="Self.FK__Coupon__hotel_id__6477ECF3" FromRole="Hotel" ToRole="Coupon" />
           <NavigationProperty Name="HotelAmenities" Relationship="Self.FK__HotelAmen__hotel__4F7CD00D" FromRole="Hotel" ToRole="HotelAmenities" />
           <NavigationProperty Name="HotelContacts" Relationship="Self.FK__HotelCont__hotel__534D60F1" FromRole="Hotel" ToRole="HotelContact" />
@@ -618,7 +616,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HappyHotelsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Amenities" EntityType="Self.Amenity" />
           <EntitySet Name="Bookings" EntityType="Self.Booking" />
           <EntitySet Name="Coupons" EntityType="Self.Coupon" />
@@ -685,7 +683,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="HappyHotelsEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Amenities">
             <EntityTypeMapping TypeName="Model.Amenity">
               <MappingFragment StoreEntitySet="Amenity">
@@ -731,7 +729,6 @@
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="country" ColumnName="country" />
                 <ScalarProperty Name="postcode" ColumnName="postcode" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="check_in_time" ColumnName="check_in_time" />
                 <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
                 <ScalarProperty Name="lattitude" ColumnName="lattitude" />

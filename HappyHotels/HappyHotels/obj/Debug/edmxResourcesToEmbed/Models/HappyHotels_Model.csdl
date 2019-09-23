@@ -48,12 +48,11 @@
     <Property Name="state" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="postcode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="check_in_time" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="check_out_time" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="lattitude" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
-    <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" Nullable="false" />
-    <Property Name="rating" Type="Int32" Nullable="false" />
+    <Property Name="lattitude" Type="Decimal" Precision="10" Scale="6" />
+    <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" />
+    <Property Name="rating" Type="Int32" />
     <NavigationProperty Name="Coupons" Relationship="Self.FK__Coupon__hotel_id__6477ECF3" FromRole="Hotel" ToRole="Coupon" />
     <NavigationProperty Name="HotelAmenities" Relationship="Self.FK__HotelAmen__hotel__4F7CD00D" FromRole="Hotel" ToRole="HotelAmenities" />
     <NavigationProperty Name="HotelContacts" Relationship="Self.FK__HotelCont__hotel__534D60F1" FromRole="Hotel" ToRole="HotelContact" />
@@ -285,7 +284,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="HappyHotelsEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Amenities" EntityType="Self.Amenity" />
     <EntitySet Name="Bookings" EntityType="Self.Booking" />
     <EntitySet Name="Coupons" EntityType="Self.Coupon" />

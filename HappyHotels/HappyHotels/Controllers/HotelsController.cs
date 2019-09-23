@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HappyHotels.Models;
-using Microsoft.AspNet.Identity;
 
 namespace HappyHotels.Controllers
 {
@@ -16,12 +15,9 @@ namespace HappyHotels.Controllers
         private HappyHotelsEntities db = new HappyHotelsEntities();
 
         // GET: Hotels
-        [Authorize]
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var hotels = db.Hotels.Where(s => s.user_id == userId).ToList();
-            return View(hotels);
+            return View(db.Hotels.ToList());
         }
 
         // GET: Hotels/Details/5
@@ -49,13 +45,9 @@ namespace HappyHotels.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "hotel_id,name,description,address,city,state,country,postcode,user_id,check_in_time,check_out_time,lattitude,longitude,rating")] Hotel hotel)
+        public ActionResult Create([Bind(Include = "hotel_id,name,description,address,city,state,country,postcode,check_in_time,check_out_time,lattitude,longitude,rating")] Hotel hotel)
         {
-            hotel.user_id = User.Identity.GetUserId();
-            ModelState.Clear();
-            TryValidateModel(hotel);
             if (ModelState.IsValid)
             {
                 db.Hotels.Add(hotel);
@@ -86,7 +78,7 @@ namespace HappyHotels.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "hotel_id,name,description,address,city,state,country,postcode,user_id,check_in_time,check_out_time,lattitude,longitude,rating")] Hotel hotel)
+        public ActionResult Edit([Bind(Include = "hotel_id,name,description,address,city,state,country,postcode,check_in_time,check_out_time,lattitude,longitude,rating")] Hotel hotel)
         {
             if (ModelState.IsValid)
             {

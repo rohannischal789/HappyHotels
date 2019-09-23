@@ -43,12 +43,11 @@
     <Property Name="state" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="country" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="postcode" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="check_in_time" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="check_out_time" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="lattitude" Type="decimal" Precision="10" Scale="6" Nullable="false" />
-    <Property Name="longitude" Type="decimal" Precision="10" Scale="6" Nullable="false" />
-    <Property Name="rating" Type="int" Nullable="false" />
+    <Property Name="lattitude" Type="decimal" Precision="10" Scale="6" />
+    <Property Name="longitude" Type="decimal" Precision="10" Scale="6" />
+    <Property Name="rating" Type="int" />
   </EntityType>
   <EntityType Name="HotelAmenities">
     <Key>

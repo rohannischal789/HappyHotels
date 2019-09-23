@@ -34,12 +34,11 @@ namespace HappyHotels.Models
         public string state { get; set; }
         public string country { get; set; }
         public string postcode { get; set; }
-        public string user_id { get; set; }
         public string check_in_time { get; set; }
         public string check_out_time { get; set; }
-        public decimal lattitude { get; set; }
-        public decimal longitude { get; set; }
-        public int rating { get; set; }
+        public Nullable<decimal> lattitude { get; set; }
+        public Nullable<decimal> longitude { get; set; }
+        public Nullable<int> rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Coupon> Coupons { get; set; }

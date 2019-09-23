@@ -153,6 +153,14 @@ namespace HappyHotels.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                string newRole = "CUSTOMER";
+                if(HttpContext.User.IsInRole("ADMIN"))
+                {
+                    newRole = "ADMIN";
+                }
+                UserManager.AddToRole(user.Id, newRole);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
