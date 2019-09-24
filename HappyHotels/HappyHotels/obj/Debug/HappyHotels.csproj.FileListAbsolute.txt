@@ -102,3 +102,7 @@ C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\o
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.csproj.CopyComplete
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.dll
 C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.pdb
+C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\SendGrid.dll
+C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\SendGrid.pdb
+C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\bin\SendGrid.xml
+C:\Users\Rohan Nischal\source\repos\FIT5032_Assignment\HappyHotels\HappyHotels\obj\Debug\HappyHotels.csprojAssemblyReference.cache
