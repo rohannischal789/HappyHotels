@@ -58,11 +58,11 @@ namespace HappyHotels
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "776773912297-8b480kq5chn4nlnt09k29se9rlesu75h.apps.googleusercontent.com",
+                ClientSecret = "jLU_WnqFY2K1BC_RRt8DsUdJ"
+            });
         }
     }
 }

@@ -10,7 +10,7 @@
 <div>
     <h4>Hotel</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal coordinates">
         <dt>
             @Html.DisplayNameFor(model => model.name)
         </dt>
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.description)
         </dt>
 
-        <dd>
+        <dd class="description">
             @Html.DisplayFor(model => model.description)
         </dd>
 
@@ -83,8 +83,37 @@
             @Html.DisplayFor(model => model.check_out_time)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.lattitude)
+        </dt>
+
+        <dd class="latitude">
+            @Html.DisplayFor(model => model.lattitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.longitude)
+        </dt>
+
+        <dd class="longitude">
+            @Html.DisplayFor(model => model.longitude)
+        </dd>
+
     </dl>
+    <div id='map' style='width: 400px; height: 300px;'>
+    </div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoicm9oYW5uaXMiLCJhIjoiY2sxMjMwdjZnMDBodTNubXNzNW5oaGp4MiJ9.ukuJhp_z2fKxFKwSlx7miA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11'
+        });
+    </script>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/mapbox")
+}
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id }) |
     @Html.ActionLink("Back to List", "Index")

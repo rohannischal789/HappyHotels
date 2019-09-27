@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace HappyHotels.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -29,20 +30,28 @@ namespace HappyHotels.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult EmailView()
         {
             var model = new EmailViewModel();
-            model.EmailAddresses = new List<SelectListItem>();
-            var context = new ApplicationDbContext();
-            var customerRole = context.Roles.FirstOrDefault(r => r.Name == "CUSTOMER");
-            var customers = context.Users.Where(u=>u.Roles.Any(r=> r.RoleId == customerRole.Id)).ToList();
-            foreach (var customer in customers)
-            {
-                model.EmailAddresses.Add(new SelectListItem() { Text = customer.Email, Value = customer.Email, Selected = false });
-            }
+            model.EmailAddresses = GetEmails();
             return View(model);
         }
 
+        private List<SelectListItem> GetEmails()
+        {
+            var emailList = new List<SelectListItem>();
+            var context = new ApplicationDbContext();
+            var customerRole = context.Roles.FirstOrDefault(r => r.Name == "CUSTOMER");
+            var customers = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).ToList();
+            foreach (var customer in customers)
+            {
+                emailList.Add(new SelectListItem() { Text = customer.Email, Value = customer.Email, Selected = false });
+            }
+            return emailList;
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult EmailView(EmailViewModel model)
         {
@@ -60,8 +69,11 @@ namespace HappyHotels.Controllers
                     ViewBag.Result = "Email has been sent.";
 
                     ModelState.Clear();
-
-                    return View(new EmailViewModel());
+                    model.Contents = "";
+                    model.Subject = "";
+                    model.ToEmail = "";
+                    model.EmailAddresses = GetEmails();
+                    return View(model);
                 }
                 catch
                 {

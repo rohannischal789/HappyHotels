@@ -20,7 +20,7 @@ namespace HappyHotels.Controllers
         {
             return View(db.Hotels.ToList());
         }
-
+        [Authorize]
         // GET: Hotels/Details/5
         public ActionResult Details(int? id)
         {
@@ -89,7 +89,7 @@ namespace HappyHotels.Controllers
             }
             return View(hotel);
         }
-
+        [Authorize]
         // GET: Hotels/Delete/5
         public ActionResult Delete(int? id)
         {
