@@ -22,7 +22,10 @@ namespace HappyHotels
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
             bundles.Add(new ScriptBundle("~/bundles/mapbox").Include(
- "~/Scripts/location.js"));
+                      "~/Scripts/location.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
+                      "~/Scripts/DataTables/jquery.dataTables.js", "~/Scripts/DataTables/dataTables.bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

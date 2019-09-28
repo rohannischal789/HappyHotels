@@ -114,7 +114,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/mapbox")
 }
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

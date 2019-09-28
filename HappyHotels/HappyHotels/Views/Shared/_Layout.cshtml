@@ -34,7 +34,7 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
                     {
                         <li>@Html.ActionLink("Hotels", "Index", "Hotels")</li>
-                        <li>@Html.ActionLink("Send Email", "EmailView", "Home")</li>
+                        <li>@Html.ActionLink("Email", "EmailView", "Home")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

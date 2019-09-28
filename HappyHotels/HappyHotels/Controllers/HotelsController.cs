@@ -14,12 +14,27 @@ namespace HappyHotels.Controllers
     {
         private HappyHotelsEntities db = new HappyHotelsEntities();
 
-        [Authorize]
+        //[Authorize]
+        //// GET: Hotels
+        //public ActionResult Index()
+        //{
+        //    return View(db.Hotels.ToList());
+        //}
+
         // GET: Hotels
-        public ActionResult Index()
+        public ActionResult Index(FilterHotelModel model)
         {
             return View(db.Hotels.ToList());
+            //if (model.CheckIn == null && model.CheckIn.Trim() == "" && model.CheckOut == null  && model.CheckOut.Trim() == "" && model.Location == null && model.Location.Trim() == "")
+            //{
+            //    return View(db.Hotels.ToList());
+            //}
+            //else
+            //{
+            //    return View(db.Hotels.Where(h=>h.address.Contains(model.Location) || h.city.Contains(model.Location)).ToList());
+            //}
         }
+
         [Authorize]
         // GET: Hotels/Details/5
         public ActionResult Details(int? id)
@@ -36,6 +51,7 @@ namespace HappyHotels.Controllers
             return View(hotel);
         }
 
+        [Authorize]
         // GET: Hotels/Create
         public ActionResult Create()
         {
@@ -45,6 +61,7 @@ namespace HappyHotels.Controllers
         // POST: Hotels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "hotel_id,name,description,address,city,state,country,postcode,check_in_time,check_out_time,lattitude,longitude,rating")] Hotel hotel)

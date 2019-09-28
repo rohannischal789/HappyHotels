@@ -1,26 +1,14 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
 
 <script>
     $(document).ready(function () {
-        var date_input = $('input[name="date"]'); //our date input has the name "date"
-        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-        var options = {
-            format: 'mm/dd/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        };
-        date_input.datepicker(options);
+        var date_input = $('input[name="date"]');
+
 
         date_input.datepicker('setDate', new Date(2019, 7, 20));
     })
@@ -42,14 +30,14 @@
                     <!-- Form code begins -->
                     <form method="post">
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div>
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="exampleForm2">Going to</label>
-                                                <input type="text" id="exampleForm2" tabindex="1" title="Enter your destination city" placeholder="Destination" class="form-control">
+                                                <input type="text" id="exampleForm2" tabindex="1" title="Enter your destination city" placeholder="Destination" onchange="" class="form-control">
                                             </div>
 
                                         </div>
@@ -57,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div>
                                 <div class="container-fluid">
                                     <div class="row">
@@ -73,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div>
 
                                 <div class="container-fluid">
@@ -91,54 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-
-                                            <div class="form-group">
-                                                <!-- Date input -->
-                                                <label class="control-label">Adults</label>
-                                                <select class="form-control" tabindex="4">
-                                                    <option selected>--</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="2">4</option>
-                                                    <option value="3">5</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 col-xs-12">
-
-                                            <div class="form-group">
-                                                <!-- Date input -->
-                                                <label class="control-label">Children</label>
-                                                <select class="form-control mb-4"  tabindex="5">
-                                                    <option selected>--</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="2">4</option>
-                                                    <option value="3">5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div>
                                 <div class="container-fluid">
                                     <div class="row">
