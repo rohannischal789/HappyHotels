@@ -1,0 +1,78 @@
+﻿@model HappyHotels.Models.Booking
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.check_in_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.check_in_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.check_out_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.check_out_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.no_of_adults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.no_of_adults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.no_of_children)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.no_of_children)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coupon.coupon_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coupon.coupon_code)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.booking_id })
+</p>
+}

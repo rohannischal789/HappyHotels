@@ -22,20 +22,18 @@ namespace HappyHotels.Controllers
         //}
 
         // GET: Hotels
-        public ActionResult Index(FilterHotelModel model)
+        public ActionResult Index(String destination)
         {
-            return View(db.Hotels.ToList());
-            //if (model.CheckIn == null && model.CheckIn.Trim() == "" && model.CheckOut == null  && model.CheckOut.Trim() == "" && model.Location == null && model.Location.Trim() == "")
-            //{
-            //    return View(db.Hotels.ToList());
-            //}
-            //else
-            //{
-            //    return View(db.Hotels.Where(h=>h.address.Contains(model.Location) || h.city.Contains(model.Location)).ToList());
-            //}
+            if (destination != null && destination.Trim() == "")
+            {
+                return View(db.Hotels.Where(h => h.address.Contains(destination) || h.city.Contains(destination)).ToList());
+            }
+            else
+            {
+                return View(db.Hotels.ToList());
+            }
         }
 
-        [Authorize]
         // GET: Hotels/Details/5
         public ActionResult Details(int? id)
         {

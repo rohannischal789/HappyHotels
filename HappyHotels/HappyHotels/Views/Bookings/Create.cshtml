@@ -1,0 +1,82 @@
+﻿@model HappyHotels.Models.Booking
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Booking</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.hotelroom_id, "hotelroom_id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Room", new List<SelectListItem> { new SelectListItem() { Text = "Single", Value = "1" }, new SelectListItem() { Text = "Deluxe", Value = "2" }, new SelectListItem() { Text = "Suites", Value = "3" } }, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.hotelroom_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.check_in_date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.check_in_date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.check_in_date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.check_out_date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.check_out_date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.check_out_date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.no_of_adults, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.no_of_adults, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.no_of_adults, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.no_of_children, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.no_of_children, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.no_of_children, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.total_price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.total_price, new { htmlAttributes = new { @class = "form-control" } })
+            <input type="button" value="Calculate Price" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Bookings", new { price = 100 })'" />
+        </div>
+    </div>
+
+    @if(ViewBag.isClicked != null && ViewBag.isClicked)
+    {
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create Booking" class="btn btn-primary" />
+        </div>
+    </div>
+    }
+</div>
+}
+@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}

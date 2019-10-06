@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -461,6 +462,10 @@
       <DependentUpon>HappyHotels_Model.edmx</DependentUpon>
       <LastGenOutput>HappyHotels_Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Photos\pexels-photo-164595.jpeg" />
+    <Content Include="Photos\pexels-photo-189296.jpeg" />
+    <Content Include="Photos\pexels-photo-258154.jpeg" />
+    <Content Include="Photos\pexels-photo-261102.jpeg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -689,6 +694,11 @@
     <Content Include="Views\Hotels\Edit.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
     <Content Include="Views\Home\EmailView.cshtml" />
+    <Content Include="Views\Bookings\Create.cshtml" />
+    <Content Include="Views\Bookings\Delete.cshtml" />
+    <Content Include="Views\Bookings\Details.cshtml" />
+    <Content Include="Views\Bookings\Edit.cshtml" />
+    <Content Include="Views\Bookings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

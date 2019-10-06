@@ -8,14 +8,14 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Hotel</h4>
     <hr />
+    
     <dl class="dl-horizontal coordinates">
         <dt>
             @Html.DisplayNameFor(model => model.name)
         </dt>
 
-        <dd>
+        <dd class="description">
             @Html.DisplayFor(model => model.name)
         </dd>
 
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.description)
         </dt>
 
-        <dd class="description">
+        <dd>
             @Html.DisplayFor(model => model.description)
         </dd>
 
@@ -100,6 +100,7 @@
         </dd>
 
     </dl>
+    View it on the Map
     <div id='map' style='width: 400px; height: 300px;'>
     </div>
     <script>
@@ -109,6 +110,14 @@
             style: 'mapbox://styles/mapbox/streets-v11'
         });
     </script>
+    <br />
+    Amenities
+    <div class="row">
+        @foreach (var item in Model.HotelAmenities)
+        {
+            <div class="col-lg-2"> @item.Amenity.name </div>
+        }
+    </div>
 </div>
 
 @section Scripts {
@@ -117,7 +126,12 @@
 @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
 {
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id })
     </p>
 }
+<p>
+   <a href=@Url.Action("Create", "Bookings")>Make a Booking</a>
+</p>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

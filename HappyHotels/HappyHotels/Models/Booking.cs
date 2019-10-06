@@ -11,16 +11,27 @@ namespace HappyHotels.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Booking
     {
         public int booking_id { get; set; }
         public string user_id { get; set; }
+        [Display(Name = "Room")]
         public int hotelroom_id { get; set; }
+        [Display(Name = "Check In Date")]
         public System.DateTime check_in_date { get; set; }
+        [Display(Name = "Check Out Date")]
         public System.DateTime check_out_date { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "It must be numeric")]
+        [Display(Name = "No of Adults")]
         public int no_of_adults { get; set; }
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "It must be numeric")]
+        [Display(Name = "No of Children")]
         public int no_of_children { get; set; }
+        [Display(Name = "Total Price")]
         public decimal total_price { get; set; }
         public Nullable<int> coupon_id { get; set; }
     
