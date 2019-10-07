@@ -20,14 +20,18 @@ namespace HappyHotels.Models
         [Display(Name = "Room")]
         public int hotelroom_id { get; set; }
         [Display(Name = "Check In Date")]
+        [DataType(DataType.Date)]
         public System.DateTime check_in_date { get; set; }
         [Display(Name = "Check Out Date")]
+        [DataType(DataType.Date)]
         public System.DateTime check_out_date { get; set; }
         [Required]
+        [Range(0, 10)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "It must be numeric")]
         [Display(Name = "No of Adults")]
         public int no_of_adults { get; set; }
         [Required]
+        [Range(0, 10)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "It must be numeric")]
         [Display(Name = "No of Children")]
         public int no_of_children { get; set; }

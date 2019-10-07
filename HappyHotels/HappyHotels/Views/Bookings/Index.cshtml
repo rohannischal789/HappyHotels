@@ -13,9 +13,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.user_id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.check_in_date)
         </th>
         <th>
@@ -33,18 +30,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Coupon.coupon_code)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HotelRoom.photo_link)
-        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user_id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.check_in_date)
             </td>
@@ -64,12 +55,12 @@
                 @Html.DisplayFor(modelItem => item.Coupon.coupon_code)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HotelRoom.photo_link)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.booking_id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.booking_id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
+                @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.booking_id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
+                }
             </td>
         </tr>
     }

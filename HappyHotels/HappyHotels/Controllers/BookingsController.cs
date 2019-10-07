@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HappyHotels.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace HappyHotels.Controllers
 {
@@ -61,6 +63,8 @@ namespace HappyHotels.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "booking_id,user_id,hotelroom_id,check_in_date,check_out_date,no_of_adults,no_of_children,total_price,coupon_id")] Booking booking)
         {
+            booking.user_id = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 db.Bookings.Add(booking);
