@@ -11,12 +11,21 @@ namespace HappyHotels.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HotelRating
     {
         public int hotelrating_id { get; set; }
+        [Required]
+        [Display(Name = "Hotel Name")]
         public int hotel_id { get; set; }
+
+        [Required(ErrorMessage = "Rating must be selected")]
+        [Display(Name = "Rating")]
         public decimal rating { get; set; }
+        [Required]
+        [StringLength(1000, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [Display(Name = "Review")]
         public string review { get; set; }
         public string user_id { get; set; }
     

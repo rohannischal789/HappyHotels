@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelRatingsController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -224,7 +225,6 @@
     <Compile Include="Models\Coupon.cs">
       <DependentUpon>HappyHotels_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmailViewModel.cs" />
     <Compile Include="Models\FilterHotelModel.cs" />
     <Compile Include="Models\HappyHotels_Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -639,6 +639,11 @@
     <Content Include="Views\Bookings\Edit.cshtml" />
     <Content Include="Views\Bookings\Index.cshtml" />
     <Content Include="Views\Hotels\Dashboard.cshtml" />
+    <Content Include="Views\HotelRatings\Create.cshtml" />
+    <Content Include="Views\HotelRatings\Delete.cshtml" />
+    <Content Include="Views\HotelRatings\Details.cshtml" />
+    <Content Include="Views\HotelRatings\Edit.cshtml" />
+    <Content Include="Views\HotelRatings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
