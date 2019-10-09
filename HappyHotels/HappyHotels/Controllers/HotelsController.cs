@@ -139,5 +139,18 @@ namespace HappyHotels.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Dashboard()
+        {
+            List<int> ratingCount = new List<int>();
+            List<decimal> ratings = db.HotelRatings.Select(r => r.rating).Distinct().ToList();
+            foreach(var rating in ratings)
+            {
+                ratingCount.Add(db.HotelRatings.Count(r => r.rating == rating));
+            }
+            ViewBag.ratings = ratings;
+            ViewBag.ratingCount = ratingCount;
+            return View();
+        }
     }
 }

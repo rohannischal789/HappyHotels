@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/Chart.js"></script>
+<style type="text/css">
+    #chart_holder{
+        border:1px solid #ddd;
+        padding:2px;
+        border-radius:5px;
+    }
+</style>
+<h2>Dashboard</h2>
+
+<div id="chart_holder">
+    <canvas id="chart1"></canvas>
+</div>
+
+<script>
+    var ratingVal = @Html.Raw(Json.Encode(ViewBag.ratings));
+    var ratingCount = @Html.Raw(Json.Encode(ViewBag.ratingCount));
+
+    var canvas = $("#chart1");
+    var chart1 = new Chart(canvas, {
+
+        type: 'bar',
+        data: {
+            labels: ratingVal,
+            datasets: [{
+                label: 'No of Ratings',
+                data: ratingCount,
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+                borderWidth:1
+            }]
+        },
+        options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+    });
+</script>
