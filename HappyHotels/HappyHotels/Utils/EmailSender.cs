@@ -1,6 +1,10 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Web;
 
 namespace HappyHotels.Utils
 {
@@ -8,15 +12,41 @@ namespace HappyHotels.Utils
     {
         private const String API_KEY = "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";
 
-        public void Send(String toEmail, String subject, String contents)
+        public void Send(List<string> toEmails, String subject, String contents, HttpPostedFileBase attachment)
         {
             var client = new SendGridClient(API_KEY);
             var from = new EmailAddress("noreply@localhost.com", "Happy Hotels Support User");
-            var to = new EmailAddress(toEmail, "");
+            List<EmailAddress> emailList = new List<EmailAddress>();
+            foreach(var toEmail in toEmails)
+            {
+                emailList.Add(new EmailAddress(toEmail, ""));
+            }
             var plainTextContent = contents;
             var htmlContent = "<p>" + contents + "</p>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, emailList, subject, plainTextContent, htmlContent);
+            //if (attachment != null && attachment.ContentLength > 0)
+            //{
+               // msg.Attachments.Add(new Attachment(attachment.InputStream,
+               //System.IO.Path.GetFileName(attachment.FileName)));
+            //}
+            if (attachment != null && attachment.ContentLength > 0)
+            {
+                MemoryStream target = new MemoryStream();
+                attachment.InputStream.CopyTo(target);
+                byte[] byteData = target.ToArray();
+                msg.Attachments = new List<Attachment>
+                {
+                    new Attachment
+                    {
+                        Content = Convert.ToBase64String(byteData),
+                        Filename = attachment.FileName,
+                        Type = "txt/plain",
+                        Disposition = "attachment"
+                    }
+                };
+            }
             var response = client.SendEmailAsync(msg);
+
         }
     }
 }

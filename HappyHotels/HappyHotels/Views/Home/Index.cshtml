@@ -1,7 +1,18 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style type="text/css">
+    .carousel .item {
+  height: 300px;
+}
 
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 300px;
+}
+</style>
 <!-- Page Content -->
     <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -37,21 +48,22 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <br />
-        <h1 class="text-center">
-            Find your ideal hotel
-        </h1>
-        <br />
-        <br />
-        <br />
         <div class="row">
             <div class="col-md-12 col-sm-12 col-lg-12">
                 <div class="well">
                     <div class="row">
+
+                        <h1 class="text-center">
+                            Find your ideal hotel
+                        </h1>
+                    </div>
+                    <br />
+                    <div class="row">
+
                         <!-- Form code begins -->
                         <form method="post">
 
-                            <div class="col-md-6">
+                            <div class="col-md-offset-4 col-md-3">
                                 <div>
                                     <div class="container-fluid">
                                         <div class="row">

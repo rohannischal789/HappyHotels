@@ -270,6 +270,7 @@
     <Compile Include="Models\Room.cs">
       <DependentUpon>HappyHotels_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SendEmailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\EmailSender.cs" />

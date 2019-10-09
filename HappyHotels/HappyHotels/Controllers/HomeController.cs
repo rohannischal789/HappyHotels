@@ -33,54 +33,56 @@ namespace HappyHotels.Controllers
         [Authorize]
         public ActionResult EmailView()
         {
-            var model = new EmailViewModel();
-            model.EmailAddresses = GetEmails();
+            var model = new SendEmailModel();
+            model.AllEmailAddresses = GetEmails();
             return View(model);
         }
 
-        private List<SelectListItem> GetEmails()
+        private MultiSelectList GetEmails()
         {
-            var emailList = new List<SelectListItem>();
-            var context = new ApplicationDbContext();
-            var customerRole = context.Roles.FirstOrDefault(r => r.Name == "CUSTOMER");
-            var customers = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).ToList();
-            foreach (var customer in customers)
+            using (var context = new ApplicationDbContext())
             {
-                emailList.Add(new SelectListItem() { Text = customer.Email, Value = customer.Email, Selected = false });
+                var customerRole = context.Roles.FirstOrDefault(r => r.Name == "CUSTOMER");
+                var customers = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).ToList();
+                var data = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).Select(c => new
+                {
+                    Name = c.Email,
+                    Value = c.Email
+                }).ToList();
+                return new MultiSelectList(data, "Name", "Value");
             }
-            return emailList;
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult EmailView(EmailViewModel model)
+        public ActionResult EmailView(SendEmailModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    String toEmail = model.ToEmail;
+                    var toEmail = model.SelectedEmailAddresses.ToList();
                     String subject = model.Subject;
                     String contents = model.Contents;
 
                     EmailSender es = new EmailSender();
-                    es.Send(toEmail, subject, contents);
+                    es.Send(toEmail, subject, contents, model.Upload);
 
                     ViewBag.Result = "Email has been sent.";
 
                     ModelState.Clear();
                     model.Contents = "";
                     model.Subject = "";
-                    model.ToEmail = "";
-                    model.EmailAddresses = GetEmails();
+                    model.AllEmailAddresses = GetEmails();
                     return View(model);
                 }
                 catch
                 {
+                    model.AllEmailAddresses = GetEmails();
                     return View();
                 }
             }
-
+            model.AllEmailAddresses = GetEmails();
             return View();
         }
     }
