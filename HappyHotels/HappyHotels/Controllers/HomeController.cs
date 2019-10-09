@@ -34,7 +34,7 @@ namespace HappyHotels.Controllers
         public ActionResult EmailView()
         {
             var model = new SendEmailModel();
-            model.AllEmailAddresses = GetEmails();
+            ViewBag.AllEmailAddresses = GetEmails();
             return View(model);
         }
 
@@ -73,16 +73,16 @@ namespace HappyHotels.Controllers
                     ModelState.Clear();
                     model.Contents = "";
                     model.Subject = "";
-                    model.AllEmailAddresses = GetEmails();
+                    ViewBag.AllEmailAddresses = GetEmails();
                     return View(model);
                 }
                 catch
                 {
-                    model.AllEmailAddresses = GetEmails();
+                    ViewBag.AllEmailAddresses = GetEmails();
                     return View();
                 }
             }
-            model.AllEmailAddresses = GetEmails();
+            ViewBag.AllEmailAddresses = GetEmails();
             return View();
         }
     }

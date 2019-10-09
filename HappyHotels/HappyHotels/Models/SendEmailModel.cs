@@ -18,6 +18,7 @@ namespace HappyHotels.Models
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "Please enter the contents")]
+        [AllowHtml]
         public string Contents { get; set; }
         [Display(Name = "Attachment")]
         public HttpPostedFileBase Upload { get; set; }
