@@ -62,7 +62,11 @@ map.on('load', function () {
         }
     });
     map.addControl(new MapboxGeocoder({
- accessToken: mapboxgl.accessToken
+        accessToken: mapboxgl.accessToken,
+        marker: {
+            color: 'orange'
+        },
+        mapboxgl: mapboxgl
  }));;
 map.addControl(new mapboxgl.NavigationControl());
 // When a click event occurs on a feature in the places layer, open a popup at the
