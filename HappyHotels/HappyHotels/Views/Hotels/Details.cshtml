@@ -109,6 +109,14 @@
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v11'
         });
+
+        // Add geolocate control to the map.
+        map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true
+        }));
     </script>
     <br />
     Amenities
@@ -131,6 +139,9 @@
 }
 <p>
    <a href=@Url.Action("Create", "Bookings")>Make a Booking</a>
+</p>
+<p>
+    <a href=@Url.Action("Create", "HotelRatings")>Add a Review</a>
 </p>
 <p>
     @Html.ActionLink("Back to List", "Index")

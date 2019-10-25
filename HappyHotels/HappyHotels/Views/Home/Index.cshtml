@@ -1,147 +1,149 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
 <style type="text/css">
     .carousel .item {
-  height: 300px;
-}
+        height: 300px;
+    }
 
-.item img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 300px;
-}
+    .item img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-height: 300px;
+    }
 </style>
 <!-- Page Content -->
-    <div class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
+<div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="~/Photos/pexels-photo-164595.jpeg" alt="abc" style="width:100%">
-                </div>
-
-                <div class="item">
-                    <img src="~/Photos/pexels-photo-189296.jpeg" alt="33" style="width:100%">
-                </div>
-
-                <div class="item">
-                    <img src="~/Photos/pexels-photo-258154.jpeg" alt="Nyork" style="width:100%">
-                </div>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="~/Photos/pexels-photo-164595.jpeg" alt="abc" style="width:100%">
             </div>
 
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="item">
+                <img src="~/Photos/pexels-photo-189296.jpeg" alt="33" style="width:100%">
+            </div>
+
+            <div class="item">
+                <img src="~/Photos/pexels-photo-258154.jpeg" alt="Nyork" style="width:100%">
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-lg-12">
-                <div class="well">
-                    <div class="row">
 
-                        <h1 class="text-center">
-                            Find your ideal hotel
-                        </h1>
-                    </div>
-                    <br />
-                    <div class="row">
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12">
+            <div class="well">
+                <div class="row">
 
-                        <!-- Form code begins -->
-                        <form method="post">
+                    <h1 class="text-center">
+                        Find your ideal hotel
+                    </h1>
+                </div>
+                <br />
+                <div class="row">
 
-                            <div class="col-md-offset-4 col-md-3">
-                                <div>
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <div class="form-group">
-                                                    <label for="exampleForm2">Going to</label>
-                                                    <input type="text" id="exampleForm2" tabindex="1" title="Enter your destination city" placeholder="Destination" onchange="" class="form-control">
-                                                </div>
+                    <!-- Form code begins -->
+                    <form method="post">
 
+                        <div class="col-md-offset-4 col-md-3">
+                            <div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label for="exampleForm2">Going to</label>
+                                                <input type="text" id="exampleForm2" tabindex="1" title="Enter your destination city" placeholder="Destination" onchange="" class="form-control">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <br />
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Hotels")?destination=' + $('#exampleForm2').val()"
+                                                       >Search</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div>
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                <br />
-                                                <div class="form-group">
-                                                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Hotels", new { destination = "" })'">Search</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <h3 class="my-4 text-center">Why Choose Us?</h3>
+        <br />
+        <br />
         <div class="row">
-            <h3 class="my-4 text-center">Why Choose Us?</h3>
-            <br />
-            <br />
-            <div class="row">
 
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="card">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
 
-                        <!-- Card content -->
-                        <div class="card-body">
-                            <!-- Title -->
-                            <h4 class="card-title"><a>Flexible Booking</a></h4>
-                            <!-- Text -->
-                            <p class="card-text">Adjust your booking with a click of a button. Easily available online</p>
-                        </div>
-
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <!-- Title -->
+                        <h4 class="card-title"><a>Flexible Booking</a></h4>
+                        <!-- Text -->
+                        <p class="card-text">Adjust your booking with a click of a button. Easily available online</p>
                     </div>
+
                 </div>
+            </div>
 
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
 
-                            <!-- Title -->
-                            <h4 class="card-title"><a>Discover</a></h4>
-                            <!-- Text -->
-                            <p class="card-text">Discover, book and manage your trip from anywhere anytime.</p>
-                        </div>
-
+                        <!-- Title -->
+                        <h4 class="card-title"><a>Discover</a></h4>
+                        <!-- Text -->
+                        <p class="card-text">Discover, book and manage your trip from anywhere anytime.</p>
                     </div>
+
                 </div>
+            </div>
 
-                <div class="col-md-4 col-sm-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
 
-                            <!-- Title -->
-                            <h4 class="card-title"><a>Trusted Services</a></h4>
-                            <!-- Text -->
-                            <p class="card-text">Our Trusted Services guarantee your booking, so that you never have to worry!</p>
+                        <!-- Title -->
+                        <h4 class="card-title"><a>Trusted Services</a></h4>
+                        <!-- Text -->
+                        <p class="card-text">Our Trusted Services guarantee your booking, so that you never have to worry!</p>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

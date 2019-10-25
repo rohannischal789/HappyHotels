@@ -24,7 +24,7 @@ namespace HappyHotels.Controllers
         // GET: Hotels
         public ActionResult Index(String destination)
         {
-            if (destination != null && destination.Trim() == "")
+            if (destination != null && destination.Trim() != "")
             {
                 return View(db.Hotels.Where(h => h.address.Contains(destination) || h.city.Contains(destination)).ToList());
             }
