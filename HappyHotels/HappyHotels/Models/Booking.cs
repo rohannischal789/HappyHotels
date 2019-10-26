@@ -13,7 +13,7 @@ namespace HappyHotels.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Booking
+    public partial class Booking : IValidatableObject
     {
         public int booking_id { get; set; }
         public string user_id { get; set; }
@@ -41,5 +41,13 @@ namespace HappyHotels.Models
     
         public virtual Coupon Coupon { get; set; }
         public virtual HotelRoom HotelRoom { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            if (check_out_date < check_in_date)
+            {
+                yield return new ValidationResult("Check out date must be greater than Check in date");
+            }
+        }
     }
 }

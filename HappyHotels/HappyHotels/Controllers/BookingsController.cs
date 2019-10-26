@@ -45,11 +45,7 @@ namespace HappyHotels.Controllers
         public ActionResult Create(int hotelID)
         {
             var model = new Booking();
-            model.HotelRoom = new HotelRoom();
-            var comparingRoomID = model.hotelroom_id == 0 ? 1 : model.hotelroom_id;
-            var room = db.Rooms.FirstOrDefault(r => r.room_id == comparingRoomID);
-            var hotelRoom = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.Room.room_name.ToLower() == room.room_name.ToLower());
-            model.HotelRoom.approx_price = hotelRoom.approx_price;
+            ViewBag.error = false;
             ViewBag.HotelName = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelID).name;
             ViewBag.coupon_id = new SelectList(db.Coupons, "coupon_id", "coupon_code");
             ViewBag.hotelroom_id = new SelectList(db.HotelRooms, "Room", "photo_link");
@@ -65,7 +61,11 @@ namespace HappyHotels.Controllers
         public ActionResult Create([Bind(Include = "booking_id,user_id,hotelroom_id,check_in_date,check_out_date,no_of_adults,no_of_children,total_price,coupon_id")] Booking booking)
         {
             booking.user_id = User.Identity.GetUserId();
-            if (ModelState.IsValid)
+            if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date == booking.check_in_date && b.check_out_date == booking.check_out_date))
+            {
+                ViewBag.error = true;
+            }
+            else if (ModelState.IsValid)
             {
                 db.Bookings.Add(booking);
                 db.SaveChanges();
@@ -74,7 +74,6 @@ namespace HappyHotels.Controllers
 
             ViewBag.coupon_id = new SelectList(db.Coupons, "coupon_id", "coupon_code", booking.coupon_id);
             ViewBag.hotelroom_id = new SelectList(db.HotelRooms, "Room", "photo_link", booking.hotelroom_id);
-            ViewBag.isClicked = false;
             return View(booking);
         }
 
