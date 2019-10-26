@@ -50,9 +50,7 @@ namespace HappyHotels.Controllers
             var room = db.Rooms.FirstOrDefault(r => r.room_id == comparingRoomID);
             var hotelRoom = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.Room.room_name.ToLower() == room.room_name.ToLower());
             model.HotelRoom.approx_price = hotelRoom.approx_price;
-            model.check_in_date = DateTime.Now.Date;
             ViewBag.HotelName = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelID).name;
-            model.check_out_date = DateTime.Now.Date;
             ViewBag.coupon_id = new SelectList(db.Coupons, "coupon_id", "coupon_code");
             ViewBag.hotelroom_id = new SelectList(db.HotelRooms, "Room", "photo_link");
             return View(model);
@@ -67,7 +65,6 @@ namespace HappyHotels.Controllers
         public ActionResult Create([Bind(Include = "booking_id,user_id,hotelroom_id,check_in_date,check_out_date,no_of_adults,no_of_children,total_price,coupon_id")] Booking booking)
         {
             booking.user_id = User.Identity.GetUserId();
-
             if (ModelState.IsValid)
             {
                 db.Bookings.Add(booking);

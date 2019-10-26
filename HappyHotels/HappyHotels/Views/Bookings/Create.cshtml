@@ -4,105 +4,121 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.js"></script>
-<h2>Create</h2>
-<script type="text/javascript">
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
 
-    
-    $('#@Html.IdFor(m => m.hotelroom_id)').change(function() {
-    $('label[for="@Html.IdFor(m => m.HotelRoom.approx_price)"]').text($(this).children('option:selected').text());
+        <h2>Create</h2>
+        <script type="text/javascript">
 
+            $(document).ready(function () {
+                var $j = jQuery.noConflict();
 
-    $(document).ready(function () {
-        $('#check_in_date').datepicker({
-            dateFormat: "dd/mm/yy",
-            showStatus: true,
-            showWeeks: true,
-            currentText: 'Now',
-            autoSize: true,
-            gotoCurrent: true,
-            showAnim: 'blind',
-            highlightWeek: true
-        });
-    });
+                $('#check_in_date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    showStatus: true,
+                    showWeeks: true,
+                    currentText: 'Now',
+                    startDate: 'Today',
+                    autoSize: true,
+                    gotoCurrent: true,
+                    showAnim: 'blind',
+                    highlightWeek: true
+                });
 
-});
+                $('#check_out_date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    showStatus: true,
+                    showWeeks: true,
+                    currentText: 'Now',
+                    startDate: 'Today',
+                    autoSize: true,
+                    gotoCurrent: true,
+                    showAnim: 'blind',
+                    highlightWeek: true
+                });
 
-</script>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+                $("#check_in_date").datepicker("update", new Date());
 
-<div class="form-horizontal">
-    <h4>Booking at @ViewBag.HotelName</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                $("#check_out_date").datepicker("update", new Date());
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.hotelroom_id, "Room Type", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.hotelroom_id, new List<SelectListItem> { new SelectListItem() { Text = "Single", Value = "1" }, new SelectListItem() { Text = "Deluxe", Value = "2" }, new SelectListItem() { Text = "Suites", Value = "3" } }, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.hotelroom_id, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            });
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.HotelRoom.approx_price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DisplayFor(model => model.HotelRoom.approx_price, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
+        </script>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.check_in_date, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.check_in_date, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.check_in_date, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-horizontal">
+                <h4>Booking at @ViewBag.HotelName</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.check_out_date, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.check_out_date, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.check_out_date, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.hotelroom_id, "Room Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.hotelroom_id, new List<SelectListItem> { new SelectListItem() { Text = "Single", Value = "1" }, new SelectListItem() { Text = "Deluxe", Value = "2" }, new SelectListItem() { Text = "Suites", Value = "3" } }, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.hotelroom_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.no_of_adults, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.no_of_adults, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.no_of_adults, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HotelRoom.approx_price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.HotelRoom.approx_price, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.no_of_children, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.no_of_children, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.no_of_children, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.check_in_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.check_in_date, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.check_in_date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.total_price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DisplayFor(model => model.total_price, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.check_out_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.check_out_date, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.check_out_date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create Booking" class="btn btn-primary" />
-        </div>
-    </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.no_of_adults, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.no_of_adults, new { htmlAttributes = new { @class = "form-control", @min = 1, @max = 4 } })
+                        @Html.ValidationMessageFor(model => model.no_of_adults, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-</div>
-}
-@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
-{
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-}
+                <div class="form-group">
+                    @Html.LabelFor(model => model.no_of_children, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.no_of_children, new { htmlAttributes = new { @class = "form-control", @min = 0, @max = 4 } })
+                        @Html.ValidationMessageFor(model => model.no_of_children, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.total_price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.total_price, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create Booking" class="btn btn-primary" />
+                    </div>
+                </div>
+
+            </div>
+        }
+        @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+        {
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
