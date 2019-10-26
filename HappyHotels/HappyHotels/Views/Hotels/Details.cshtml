@@ -143,10 +143,13 @@
     </p>
 }
 <p>
-   <a href=@Url.Action("Create", "Bookings")>Make a Booking</a>
+   <a href=@Url.Action("Create", "Bookings", new { hotelID = Model.hotel_id })>Make a Booking</a>
 </p>
 <p>
-    <a href=@Url.Action("Create", "HotelRatings")>Add a Review</a>
+    <a href=@Url.Action("Create", "HotelRatings", new { hotelID = Model.hotel_id })>Add a Review</a>
+</p>
+<p>
+    <a href=@Url.Action("Dashboard", "Hotels", new { hotelID = Model.hotel_id })>View Ratings Graph</a>
 </p>
 <p>
     @Html.ActionLink("Back to List", "Index")

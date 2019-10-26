@@ -78,11 +78,11 @@
                         @Html.DisplayFor(modelItem => item.check_out_time)
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.hotel_id })
-
+                        @Html.ActionLink("Details", "Details", new { id = item.hotel_id }) 
+                        <br />
                         @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
                         {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id }) <br />
                             @Html.ActionLink("Delete", "Delete", new { id = item.hotel_id })
                         }
                     </td>

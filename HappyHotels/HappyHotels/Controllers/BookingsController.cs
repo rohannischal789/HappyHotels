@@ -42,16 +42,19 @@ namespace HappyHotels.Controllers
 
         [Authorize]
         // GET: Bookings/Create
-        public ActionResult Create(int? price)
+        public ActionResult Create(int hotelID)
         {
             var model = new Booking();
-            model.total_price = price == null ? 0 : (int) price;
+            model.HotelRoom = new HotelRoom();
+            var comparingRoomID = model.hotelroom_id == 0 ? 1 : model.hotelroom_id;
+            var room = db.Rooms.FirstOrDefault(r => r.room_id == comparingRoomID);
+            var hotelRoom = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.Room.room_name.ToLower() == room.room_name.ToLower());
+            model.HotelRoom.approx_price = hotelRoom.approx_price;
             model.check_in_date = DateTime.Now.Date;
+            ViewBag.HotelName = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelID).name;
             model.check_out_date = DateTime.Now.Date;
             ViewBag.coupon_id = new SelectList(db.Coupons, "coupon_id", "coupon_code");
             ViewBag.hotelroom_id = new SelectList(db.HotelRooms, "Room", "photo_link");
-            if(price!=null)
-                ViewBag.IsClicked = true;
             return View(model);
         }
 

@@ -140,11 +140,19 @@ namespace HappyHotels.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(int? hotelID)
         {
             List<int> ratingCount = new List<int>();
-            List<decimal> ratings = db.HotelRatings.Select(r => r.rating).Distinct().ToList();
-            foreach(var rating in ratings)
+            List<decimal> ratings = new List<decimal>();
+            if (hotelID != null && hotelID != 0)
+            {
+                ratings = db.HotelRatings.Where(h => h.hotel_id == hotelID).Select(r => r.rating).Distinct().OrderBy(r => r).ToList();
+            }
+            else
+            {
+                ratings = db.HotelRatings.Select(r => r.rating).Distinct().OrderBy(r => r).ToList();
+            }
+            foreach (var rating in ratings)
             {
                 ratingCount.Add(db.HotelRatings.Count(r => r.rating == rating));
             }

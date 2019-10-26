@@ -38,12 +38,12 @@ namespace HappyHotels.Controllers
         }
 
         // GET: HotelRatings/Create
-        public ActionResult Create(string hotelName)
+        public ActionResult Create(int hotelID)
         {
             var hotels = db.Hotels.ToList();
-            if (hotelName!=null && hotelName.Trim().Length!=0)
+            if (hotelID != 0)
             {
-                hotels = db.Hotels.Where(h => h.name.ToLower() == hotelName.ToLower()).ToList();
+                hotels = db.Hotels.Where(h => h.hotel_id == hotelID).ToList();
             }
             ViewBag.hotel_id = new SelectList(hotels, "hotel_id", "name");
             return View();

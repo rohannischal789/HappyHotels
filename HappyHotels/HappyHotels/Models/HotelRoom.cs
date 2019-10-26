@@ -11,7 +11,8 @@ namespace HappyHotels.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HotelRoom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,6 +25,7 @@ namespace HappyHotels.Models
         public int hotel_id { get; set; }
         public int room_id { get; set; }
         public string photo_link { get; set; }
+        [Display(Name = "Price per day")]
         public int approx_price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
