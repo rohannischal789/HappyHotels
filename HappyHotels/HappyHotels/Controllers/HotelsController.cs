@@ -62,6 +62,12 @@ namespace HappyHotels.Controllers
             {
                 db.Hotels.Add(hotel);
                 db.SaveChanges();
+
+                db.HotelRooms.AddRange(new List<HotelRoom>() { new HotelRoom() { hotel_id=hotel.hotel_id,room_id=1,approx_price=100},
+                    new HotelRoom() { hotel_id = hotel.hotel_id, room_id = 2, approx_price = 200 },
+                new HotelRoom() { hotel_id=hotel.hotel_id,room_id=3,approx_price=300}});
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 

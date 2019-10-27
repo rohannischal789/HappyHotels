@@ -21,145 +21,181 @@
             border-radius: 3px;
         }
 </style>
-<h2>Details</h2>
 
-<div>
-    <hr />
-
-    <dl class="dl-horizontal coordinates">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd class="description">
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.state)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.state)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.country)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.postcode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.postcode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.check_in_time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.check_in_time)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.check_out_time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.check_out_time)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.lattitude)
-        </dt>
-
-        <dd class="latitude">
-            @Html.DisplayFor(model => model.lattitude)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.longitude)
-        </dt>
-
-        <dd class="longitude">
-            @Html.DisplayFor(model => model.longitude)
-        </dd>
-
-    </dl>
+<div class="container">
+    <h3>Details</h3>
     <br />
-    View it on the Map
-    <div id='map' style='width: 800px; height: 600px;'>
-    </div>
-    <div id='distance' class='distance-container'></div>
-
-    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
-
-    <br />
-    Amenities
     <div class="row">
-        @foreach (var item in Model.HotelAmenities)
-        {
-            <div class="col-lg-2"> @item.Amenity.name </div>
-        }
+        <div class="col-lg-8">
+            <dl class="dl-horizontal coordinates">
+                <dt>
+                    @Html.DisplayNameFor(model => model.name)
+                </dt>
+
+                <dd class="description">
+                    @Html.DisplayFor(model => model.name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.address)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.city)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.city)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.state)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.state)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.country)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.country)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.postcode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.postcode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.rating)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.rating)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.check_in_time)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.check_in_time)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.check_out_time)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.check_out_time)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.lattitude)
+                </dt>
+
+                <dd class="latitude">
+                    @Html.DisplayFor(model => model.lattitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.longitude)
+                </dt>
+
+                <dd class="longitude">
+                    @Html.DisplayFor(model => model.longitude)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-lg-4">
+            <strong>
+                Amenities
+            </strong>
+            <div class="row">
+                @foreach (var item in Model.HotelAmenities)
+                {
+                    <div class="col-lg-3"> @item.Amenity.name </div>
+                }
+            </div>
+            <br />
+            <strong>
+                Contact Nos
+            </strong>
+            <div class="row">
+                @foreach (var item in Model.HotelContacts)
+                {
+                    <div class="col-lg-4"> @item.contact_no</div>
+                }
+            </div>
+            <br />
+            <strong>
+                Nearest Landmarks
+            </strong>
+            <div class="row">
+                @foreach (var item in Model.HotelLandmarks)
+                {
+                    <div class="row" style="margin-left:2px">
+                        <div class="col-lg-8">
+                            @item.Landmark.landmark_name -
+                            @item.distance
+                        </div>
+                    </div>
+                }
+            </div>
+            <br />
+            @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id })
+                </p>
+            }
+            <p>
+                <a href=@Url.Action("Create", "Bookings", new { hotelID = Model.hotel_id })>Make a Booking</a>
+            </p>
+            <p>
+                <a href=@Url.Action("Create", "HotelRatings", new { hotelID = Model.hotel_id })>Add a Review</a>
+            </p>
+            <p>
+                <a href=@Url.Action("Dashboard", "Hotels", new { hotelID = Model.hotel_id })>View Ratings Graph</a>
+            </p>
+            <p>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <br />
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-offset-2">
+            <strong class="text-center">View it on the Map</strong>
+            <br />
+            <div id='map' style='width: 800px; height: 400px;'>
+            </div>
+            <div id='distance' class='distance-container'></div>
+
+            <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
+        </div>
     </div>
 </div>
-<br />
 @section Scripts {
     @Scripts.Render("~/bundles/mapbox")
 }
-@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
-{
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.hotel_id })
-    </p>
-}
-<p>
-    <a href=@Url.Action("Create", "Bookings", new { hotelID = Model.hotel_id })>Make a Booking</a>
-</p>
-<p>
-    <a href=@Url.Action("Create", "HotelRatings", new { hotelID = Model.hotel_id })>Add a Review</a>
-</p>
-<p>
-    <a href=@Url.Action("Dashboard", "Hotels", new { hotelID = Model.hotel_id })>View Ratings Graph</a>
-</p>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

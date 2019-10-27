@@ -46,7 +46,6 @@ namespace HappyHotels.Utils
                 };
             }
             var response = client.SendEmailAsync(msg);
-
         }
     }
 }

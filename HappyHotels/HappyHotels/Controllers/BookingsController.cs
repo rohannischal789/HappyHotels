@@ -147,8 +147,10 @@ namespace HappyHotels.Controllers
                     dayDiff = 1;
                 }
                 booking.total_price = dayDiff * db.HotelRooms.FirstOrDefault(b => b.hotelroom_id == booking.hotelroom_id).approx_price;  // calculate the total price
-
-                db.Entry(booking).State = EntityState.Modified;
+                var currentBooking = db.Bookings.FirstOrDefault(b => b.booking_id == booking.booking_id);
+                db.Bookings.Remove(currentBooking);
+                db.SaveChanges();
+                db.Entry(booking).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -13,7 +13,7 @@ namespace HappyHotels.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Hotel
+    public partial class Hotel : IValidatableObject
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Hotel()
@@ -64,7 +64,9 @@ namespace HappyHotels.Models
         [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at most {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Check Out Time")]
         public string check_out_time { get; set; }
+        [Display(Name = "Latitude")]
         public Nullable<decimal> lattitude { get; set; }
+        [Display(Name = "Longitude")]
         public Nullable<decimal> longitude { get; set; }
         [Display(Name = "Rating")]
         public Nullable<int> rating { get; set; }
@@ -83,5 +85,17 @@ namespace HappyHotels.Models
         public virtual ICollection<HotelRating> HotelRatings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HotelRoom> HotelRooms { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            if (lattitude.HasValue && lattitude.Value.ToString().Replace(".","").Length >= 10)
+            {
+                yield return new ValidationResult("Latitude should be less than 10 digits");
+            }
+            else if (longitude.HasValue && longitude.Value.ToString().Replace(".", "").Length >= 10)
+            {
+                yield return new ValidationResult("Longitude should be less than 10 digits");
+            }
+        }
     }
 }
