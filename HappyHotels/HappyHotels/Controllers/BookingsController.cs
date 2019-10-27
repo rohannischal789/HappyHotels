@@ -20,8 +20,16 @@ namespace HappyHotels.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            var bookings = db.Bookings.Include(b => b.Coupon).Include(b => b.HotelRoom);
-            return View(bookings.ToList());
+            if (!User.IsInRole("ADMIN"))
+            {
+                var bookings = db.Bookings.Where(b => b.user_id == User.Identity.GetUserId()).Include(b => b.Coupon).Include(b => b.HotelRoom);
+                return View(bookings.ToList());
+            }
+            else
+            {
+                var bookings = db.Bookings.Include(b => b.Coupon).Include(b => b.HotelRoom);
+                return View(bookings.ToList());
+            }
         }
 
         [Authorize]

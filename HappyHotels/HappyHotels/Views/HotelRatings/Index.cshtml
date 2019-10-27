@@ -11,42 +11,48 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.review)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hotel.name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.review)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.user_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hotel.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.hotelrating_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.hotelrating_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.hotelrating_id })
-        </td>
-    </tr>
-}
-
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.review)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hotel.name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.review)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hotel.name)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.hotelrating_id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/datatable")
+    <script>
+            $(document).ready(function () {
+                $('.table').DataTable();
+            });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

@@ -765,8 +765,6 @@
     <Content Include="Views\Hotels\Dashboard.cshtml" />
     <Content Include="Views\HotelRatings\Create.cshtml" />
     <Content Include="Views\HotelRatings\Delete.cshtml" />
-    <Content Include="Views\HotelRatings\Details.cshtml" />
-    <Content Include="Views\HotelRatings\Edit.cshtml" />
     <Content Include="Views\HotelRatings\Index.cshtml" />
     <Content Include="Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />

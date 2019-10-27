@@ -4,23 +4,23 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <style>
-        .distance-container {
-            width: 800px;
-            z-index: 1;
-        }
+<style>
+    .distance-container {
+        width: 800px;
+        z-index: 1;
+    }
 
-            .distance-container > * {
-                background-color: rgba(0, 0, 0, 0.5);
-                color: #fff;
-                font-size: 11px;
-                line-height: 18px;
-                display: block;
-                margin: 0;
-                padding: 5px 10px;
-                border-radius: 3px;
-            }
-    </style>
+        .distance-container > * {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            display: block;
+            margin: 0;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+</style>
 <h2>Details</h2>
 
 <div>
@@ -84,6 +84,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.check_in_time)
         </dt>
 
@@ -116,13 +124,14 @@
         </dd>
 
     </dl>
+    <br />
     View it on the Map
     <div id='map' style='width: 800px; height: 600px;'>
     </div>
     <div id='distance' class='distance-container'></div>
 
     <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v2.0.2/turf.min.js'></script>
-   
+
     <br />
     Amenities
     <div class="row">
@@ -132,7 +141,7 @@
         }
     </div>
 </div>
-
+<br />
 @section Scripts {
     @Scripts.Render("~/bundles/mapbox")
 }
@@ -143,7 +152,7 @@
     </p>
 }
 <p>
-   <a href=@Url.Action("Create", "Bookings", new { hotelID = Model.hotel_id })>Make a Booking</a>
+    <a href=@Url.Action("Create", "Bookings", new { hotelID = Model.hotel_id })>Make a Booking</a>
 </p>
 <p>
     <a href=@Url.Action("Create", "HotelRatings", new { hotelID = Model.hotel_id })>Add a Review</a>

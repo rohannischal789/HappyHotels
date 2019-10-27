@@ -7,57 +7,57 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.check_in_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.check_out_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.no_of_adults)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.no_of_children)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.total_price)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.check_in_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.check_out_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.no_of_adults)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.no_of_children)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.total_price)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.booking_id }) |
-                @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.booking_id })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.check_in_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.check_out_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_adults)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_children)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total_price)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.check_in_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.check_out_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.no_of_adults)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.no_of_children)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_price)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.booking_id }) <br />
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.booking_id }) <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
 
 </table>
 @section Scripts {

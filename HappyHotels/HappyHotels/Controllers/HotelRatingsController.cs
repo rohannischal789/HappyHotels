@@ -18,28 +18,22 @@ namespace HappyHotels.Controllers
         // GET: HotelRatings
         public ActionResult Index()
         {
-            var hotelRatings = db.HotelRatings.Include(h => h.Hotel);
-            return View(hotelRatings.ToList());
-        }
-
-        // GET: HotelRatings/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            if (!User.IsInRole("ADMIN"))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var hotelRatings = db.HotelRatings.Where(b => b.user_id == User.Identity.GetUserId()).Include(h => h.Hotel);
+                return View(hotelRatings.ToList());
             }
-            HotelRating hotelRating = db.HotelRatings.Find(id);
-            if (hotelRating == null)
+            else
             {
-                return HttpNotFound();
+                var hotelRatings = db.HotelRatings.Include(h => h.Hotel);
+                return View(hotelRatings.ToList());
             }
-            return View(hotelRating);
         }
 
         // GET: HotelRatings/Create
         public ActionResult Create(int hotelID)
         {
+            ViewBag.error = false;
             var hotels = db.Hotels.ToList();
             if (hotelID != 0)
             {
@@ -57,46 +51,23 @@ namespace HappyHotels.Controllers
         public ActionResult Create([Bind(Include = "hotelrating_id,hotel_id,rating,review,user_id")] HotelRating hotelRating)
         {
             hotelRating.user_id = User.Identity.GetUserId();
-            if (ModelState.IsValid && hotelRating.rating > 0)
+            if(hotelRating.rating <= 0)
+            {
+                ViewBag.error = true;
+            }
+            else if (ModelState.IsValid && hotelRating.rating > 0)
             {
                 db.HotelRatings.Add(hotelRating);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.hotel_id = new SelectList(db.Hotels, "hotel_id", "name", hotelRating.hotel_id);
-            return View(hotelRating);
-        }
-
-        // GET: HotelRatings/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HotelRating hotelRating = db.HotelRatings.Find(id);
-            if (hotelRating == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.hotel_id = new SelectList(db.Hotels, "hotel_id", "name", hotelRating.hotel_id);
-            return View(hotelRating);
-        }
-
-        // POST: HotelRatings/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "hotelrating_id,hotel_id,rating,review,user_id")] HotelRating hotelRating)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(hotelRating).State = EntityState.Modified;
+                var hotel = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelRating.hotel_id);
+                var ratingAvg = hotel.HotelRatings.Average(h => h.rating);
+                hotel.rating = (int)ratingAvg;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
+
             ViewBag.hotel_id = new SelectList(db.Hotels, "hotel_id", "name", hotelRating.hotel_id);
             return View(hotelRating);
         }
