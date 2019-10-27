@@ -11,6 +11,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.HotelRoom.Hotel.name)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.check_in_date)
             </th>
             <th>
@@ -31,31 +34,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.check_in_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.check_out_date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.no_of_adults)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.no_of_children)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.total_price)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.booking_id }) <br />
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.booking_id }) <br />
-                        @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelRoom.Hotel.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.check_in_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.check_out_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_adults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_children)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.booking_id }) <br />
+                @Html.ActionLink("Edit", "Edit", new { id = item.booking_id }) <br />
+                @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
+            </td>
+        </tr>
         }
         </tbody>
 

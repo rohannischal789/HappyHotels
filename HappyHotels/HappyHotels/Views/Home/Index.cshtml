@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <style type="text/css">
     .carousel .item {
         height: 300px;
@@ -71,7 +71,7 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="form-group">
                                                 <label for="exampleForm2">Going to</label>
-                                                <input type="text" id="exampleForm2" tabindex="1" title="Enter your destination city" placeholder="Destination" onchange="" class="form-control">
+                                                <input type="text" id="destinationName" tabindex="1" title="Enter your destination city" placeholder="Destination" onchange="" class="form-control">
                                             </div>
 
                                         </div>
@@ -86,7 +86,7 @@
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <br />
                                             <div class="form-group">
-                                                <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Hotels")?destination=' + $('#exampleForm2').val()">
+                                                <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Hotels")?destination=' + $('#destinationName').val()">
                                                     Search
                                                 </button>
                                             </div>
@@ -110,7 +110,7 @@
                 <div class="card">
 
                     <!-- Card content -->
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <!-- Title -->
                         <h4 class="card-title"><a>Flexible Booking</a></h4>
                         <!-- Text -->
@@ -122,7 +122,7 @@
 
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body text-center">
 
                         <!-- Title -->
                         <h4 class="card-title"><a>Discover</a></h4>
@@ -135,7 +135,7 @@
 
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body text-center">
 
                         <!-- Title -->
                         <h4 class="card-title"><a>Trusted Services</a></h4>
@@ -145,6 +145,56 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <br />
+        <br />
+        <h3 class="my-4 text-center">Popular Cities</h3>
+        <br />
+        <br />
+        <div class="row">
+            <ul class="thumbnails list-unstyled">
+                <li class="col-md-4">
+                    <a href="@Url.Action("Index", "Hotels")?destination=Melbourne">
+                        <div class="thumbnail" style="padding: 0">
+                            <div style="padding:4px">
+                                <img alt="300x200" style="width: 100%" src="~/Photos/melbournefree.jpg">
+                            </div>
+                            <div class="caption">
+                                <h2>Melbourne</h2>
+                                <p><i class="icon icon-map-marker"></i>Victoria, Australia</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="col-md-4">
+                    <a href="@Url.Action("Index", "Hotels")?destination=Sydney">
+                        <div class="thumbnail" style="padding: 0">
+                            <div style="padding:4px">
+                                <img alt="300x200" style="width: 100%" src="~/Photos/sydneyfree1.jpg">
+                            </div>
+                            <div class="caption">
+                                <h2>Sydney</h2>
+                                <p><i class="icon icon-map-marker"></i>NSW, Australia</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="col-md-4">
+                    <a href="@Url.Action("Index", "Hotels")?destination=Brisbane">
+                        <div class="thumbnail" style="padding: 0">
+                            <div style="padding:4px">
+                                <img alt="300x200" style="width: 100%" src="~/Photos/brisfree.jpg">
+                            </div>
+                            <div class="caption">
+                                <h2>Brisbane</h2>
+                                <p><i class="icon icon-map-marker"></i>Queensland, Australia</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

@@ -18,9 +18,10 @@ namespace HappyHotels.Controllers
         // GET: HotelRatings
         public ActionResult Index()
         {
+            var userID = User.Identity.GetUserId();
             if (!User.IsInRole("ADMIN"))
             {
-                var hotelRatings = db.HotelRatings.Where(b => b.user_id == User.Identity.GetUserId()).Include(h => h.Hotel);
+                var hotelRatings = db.HotelRatings.Where(b => b.user_id == userID).Include(h => h.Hotel);
                 return View(hotelRatings.ToList());
             }
             else

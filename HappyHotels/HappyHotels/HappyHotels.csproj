@@ -463,10 +463,14 @@
       <DependentUpon>HappyHotels_Model.edmx</DependentUpon>
       <LastGenOutput>HappyHotels_Model.cs</LastGenOutput>
     </Content>
+    <Content Include="Photos\brisfree.jpg" />
+    <Content Include="Photos\Logo.png" />
+    <Content Include="Photos\melbournefree.jpg" />
     <Content Include="Photos\pexels-photo-164595.jpeg" />
     <Content Include="Photos\pexels-photo-189296.jpeg" />
     <Content Include="Photos\pexels-photo-258154.jpeg" />
     <Content Include="Photos\pexels-photo-261102.jpeg" />
+    <Content Include="Photos\sydneyfree1.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
