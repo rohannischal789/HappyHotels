@@ -14,17 +14,11 @@ namespace HappyHotels.Controllers
     {
         private HappyHotelsEntities db = new HappyHotelsEntities();
 
-        //[Authorize]
-        //// GET: Hotels
-        //public ActionResult Index()
-        //{
-        //    return View(db.Hotels.ToList());
-        //}
 
         // GET: Hotels
         public ActionResult Index(String destination)
         {
-            if (destination != null && destination.Trim() != "")
+            if (destination != null && destination.Trim() != "") // if searched through keyword
             {
                 return View(db.Hotels.Where(h => h.address.Contains(destination) || h.city.Contains(destination)).ToList());
             }
@@ -74,6 +68,7 @@ namespace HappyHotels.Controllers
             return View(hotel);
         }
 
+        [Authorize]
         // GET: Hotels/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,6 +84,7 @@ namespace HappyHotels.Controllers
             return View(hotel);
         }
 
+        [Authorize]
         // POST: Hotels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -120,12 +116,24 @@ namespace HappyHotels.Controllers
             return View(hotel);
         }
 
+        [Authorize]
         // POST: Hotels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Hotel hotel = db.Hotels.Find(id);
+            // delete all foreign keys first
+            db.HotelAmenities.RemoveRange(hotel.HotelAmenities);
+            foreach (var room in hotel.HotelRooms)
+            {
+                db.Bookings.RemoveRange(room.Bookings);
+            }
+            db.HotelRooms.RemoveRange(hotel.HotelRooms);
+            db.HotelRatings.RemoveRange(hotel.HotelRatings);
+            db.HotelPhotoes.RemoveRange(hotel.HotelPhotoes);
+            db.HotelLandmarks.RemoveRange(hotel.HotelLandmarks);
+            db.HotelContacts.RemoveRange(hotel.HotelContacts);
             db.Hotels.Remove(hotel);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -140,21 +148,32 @@ namespace HappyHotels.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize]
         public ActionResult Dashboard(int? hotelID)
         {
             List<int> ratingCount = new List<int>();
             List<decimal> ratings = new List<decimal>();
-            if (hotelID != null && hotelID != 0)
+            if (hotelID != null && hotelID != 0) // if for a particular hotel
             {
+                // fetch all distinct ratings for the hotel
                 ratings = db.HotelRatings.Where(h => h.hotel_id == hotelID).Select(r => r.rating).Distinct().OrderBy(r => r).ToList();
+
+                // count number of ratings per each distinct rating
+                foreach (var rating in ratings)
+                {
+                    ratingCount.Add(db.HotelRatings.Where(h => h.hotel_id == hotelID).Count(r => r.rating == rating));
+                }
             }
             else
             {
+                // fetch all distinct ratings for the hotel
                 ratings = db.HotelRatings.Select(r => r.rating).Distinct().OrderBy(r => r).ToList();
-            }
-            foreach (var rating in ratings)
-            {
-                ratingCount.Add(db.HotelRatings.Count(r => r.rating == rating));
+
+                // count number of ratings per each distinct rating
+                foreach (var rating in ratings)
+                {
+                    ratingCount.Add(db.HotelRatings.Count(r => r.rating == rating));
+                }
             }
             ViewBag.ratings = ratings;
             ViewBag.ratingCount = ratingCount;

@@ -21,7 +21,7 @@ namespace HappyHotels.Controllers
         public ActionResult Index()
         {
             var userID = User.Identity.GetUserId();
-            if (!User.IsInRole("ADMIN"))
+            if (!User.IsInRole("ADMIN")) // if user is a customer, fetch only his/her records
             {
                 var bookings = db.Bookings.Where(b => b.user_id == userID).Include(b => b.Coupon).Include(b => b.HotelRoom);
                 return View(bookings.ToList());
@@ -55,11 +55,12 @@ namespace HappyHotels.Controllers
         {
             var model = new Booking();
             ViewBag.error = false;
+            Session["hotelID"] = hotelID;
             model.HotelRoom = new HotelRoom();
             var comparingRoomID = model.hotelroom_id == 0 ? 1 : model.hotelroom_id;
             var room = db.Rooms.FirstOrDefault(r => r.room_id == comparingRoomID);
             var hotelRoom = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.Room.room_name.ToLower() == room.room_name.ToLower());
-            model.HotelRoom.approx_price = hotelRoom.approx_price;
+            model.HotelRoom.approx_price = hotelRoom.approx_price; // setting up the price per day for the room
             ViewBag.HotelName = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelID).name;
             ViewBag.coupon_id = new SelectList(db.Coupons, "coupon_id", "coupon_code");
             ViewBag.hotelroom_id = new SelectList(db.HotelRooms, "Room", "photo_link");
@@ -75,6 +76,10 @@ namespace HappyHotels.Controllers
         public ActionResult Create([Bind(Include = "booking_id,user_id,hotelroom_id,check_in_date,check_out_date,no_of_adults,no_of_children,total_price,coupon_id")] Booking booking)
         {
             booking.user_id = User.Identity.GetUserId();
+            int hotelID = Convert.ToInt32( Session["hotelID"]);
+            booking.hotelroom_id = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.room_id == booking.hotelroom_id).hotelroom_id; // updating the hotelroom_id as per the selected room id in hotel
+
+            // if booking exists on the same day for the same room, booking constraint is shown
             if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date == booking.check_in_date && b.check_out_date == booking.check_out_date))
             {
                 ViewBag.error = true;
@@ -86,7 +91,7 @@ namespace HappyHotels.Controllers
                 {
                     dayDiff = 1;
                 }
-                booking.total_price = dayDiff * db.HotelRooms.FirstOrDefault(b => b.hotelroom_id == booking.hotelroom_id).approx_price;
+                booking.total_price = dayDiff * db.HotelRooms.FirstOrDefault(b => b.hotelroom_id == booking.hotelroom_id).approx_price; // calculate the total price
                 db.Bookings.Add(booking);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,6 +102,7 @@ namespace HappyHotels.Controllers
             return View(booking);
         }
 
+        [Authorize]
         // GET: Bookings/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -125,6 +131,10 @@ namespace HappyHotels.Controllers
         public ActionResult Edit([Bind(Include = "booking_id,user_id,hotelroom_id,check_in_date,check_out_date,no_of_adults,no_of_children,total_price,coupon_id")] Booking booking)
         {
             booking.user_id = User.Identity.GetUserId();
+            int hotelID = db.Bookings.FirstOrDefault(b=>b.booking_id==booking.booking_id).HotelRoom.hotel_id;
+            booking.hotelroom_id = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.room_id == booking.hotelroom_id).hotelroom_id; // updating the hotelroom_id as per the selected room id in hotel
+
+            // if booking exists on the same day for the same room (apart from the current booking id), booking constraint is shown
             if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date == booking.check_in_date && b.check_out_date == booking.check_out_date && b.booking_id != booking.booking_id))
             {
                 ViewBag.error = true;
@@ -136,7 +146,7 @@ namespace HappyHotels.Controllers
                 {
                     dayDiff = 1;
                 }
-                booking.total_price = dayDiff * db.HotelRooms.FirstOrDefault(b => b.hotelroom_id == booking.hotelroom_id).approx_price;
+                booking.total_price = dayDiff * db.HotelRooms.FirstOrDefault(b => b.hotelroom_id == booking.hotelroom_id).approx_price;  // calculate the total price
 
                 db.Entry(booking).State = EntityState.Modified;
                 db.SaveChanges();
@@ -163,6 +173,7 @@ namespace HappyHotels.Controllers
             return View(booking);
         }
 
+        [Authorize]
         // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

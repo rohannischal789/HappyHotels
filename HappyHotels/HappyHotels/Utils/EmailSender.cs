@@ -19,7 +19,7 @@ namespace HappyHotels.Utils
             List<EmailAddress> emailList = new List<EmailAddress>();
             foreach(var toEmail in toEmails)
             {
-                emailList.Add(new EmailAddress(toEmail, ""));
+                emailList.Add(new EmailAddress(toEmail, "")); // convert to email address
             }
             var plainTextContent = contents;
             var htmlContent = "<p>" + contents + "</p>";
@@ -29,16 +29,16 @@ namespace HappyHotels.Utils
                // msg.Attachments.Add(new Attachment(attachment.InputStream,
                //System.IO.Path.GetFileName(attachment.FileName)));
             //}
-            if (attachment != null && attachment.ContentLength > 0)
+            if (attachment != null && attachment.ContentLength > 0) // if attachment added
             {
                 MemoryStream target = new MemoryStream();
                 attachment.InputStream.CopyTo(target);
-                byte[] byteData = target.ToArray();
+                byte[] byteData = target.ToArray(); // fetch byte data from the file
                 msg.Attachments = new List<Attachment>
                 {
                     new Attachment
                     {
-                        Content = Convert.ToBase64String(byteData),
+                        Content = Convert.ToBase64String(byteData), // convert to base 64 for sending email
                         Filename = attachment.FileName,
                         Type = "txt/plain",
                         Disposition = "attachment"

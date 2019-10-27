@@ -19,9 +19,16 @@ namespace HappyHotels.Controllers
         [Authorize]
         public ActionResult EmailView()
         {
-            var model = new SendEmailModel();
-            ViewBag.AllEmailAddresses = GetEmails();
-            return View(model);
+            if (User.IsInRole("ADMIN"))
+            {
+                var model = new SendEmailModel();
+                ViewBag.AllEmailAddresses = GetEmails();
+                return View(model);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.Unauthorized);
+            }
         }
 
         private MultiSelectList GetEmails()
@@ -29,7 +36,7 @@ namespace HappyHotels.Controllers
             using (var context = new ApplicationDbContext())
             {
                 var customerRole = context.Roles.FirstOrDefault(r => r.Name == "CUSTOMER");
-                var customers = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).ToList();
+                var customers = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).ToList(); // get all users who are customers
                 var data = context.Users.Where(u => u.Roles.Any(r => r.RoleId == customerRole.Id)).Select(c => new
                 {
                     Name = c.Email,

@@ -15,11 +15,12 @@ namespace HappyHotels.Controllers
     {
         private HappyHotelsEntities db = new HappyHotelsEntities();
 
+        [Authorize]
         // GET: HotelRatings
         public ActionResult Index()
         {
             var userID = User.Identity.GetUserId();
-            if (!User.IsInRole("ADMIN"))
+            if (!User.IsInRole("ADMIN")) // if user is customer, fetch only the user's reviews
             {
                 var hotelRatings = db.HotelRatings.Where(b => b.user_id == userID).Include(h => h.Hotel);
                 return View(hotelRatings.ToList());
@@ -31,6 +32,7 @@ namespace HappyHotels.Controllers
             }
         }
 
+        [Authorize]
         // GET: HotelRatings/Create
         public ActionResult Create(int hotelID)
         {
@@ -44,6 +46,7 @@ namespace HappyHotels.Controllers
             return View();
         }
 
+        [Authorize]
         // POST: HotelRatings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -52,7 +55,7 @@ namespace HappyHotels.Controllers
         public ActionResult Create([Bind(Include = "hotelrating_id,hotel_id,rating,review,user_id")] HotelRating hotelRating)
         {
             hotelRating.user_id = User.Identity.GetUserId();
-            if(hotelRating.rating <= 0)
+            if(hotelRating.rating <= 0)  // if given is not given
             {
                 ViewBag.error = true;
             }
@@ -62,7 +65,7 @@ namespace HappyHotels.Controllers
                 db.SaveChanges();
 
                 var hotel = db.Hotels.FirstOrDefault(h => h.hotel_id == hotelRating.hotel_id);
-                var ratingAvg = hotel.HotelRatings.Average(h => h.rating);
+                var ratingAvg = hotel.HotelRatings.Average(h => h.rating); // recalculate the rating for the hotel
                 hotel.rating = (int)ratingAvg;
                 db.SaveChanges();
 
@@ -73,6 +76,7 @@ namespace HappyHotels.Controllers
             return View(hotelRating);
         }
 
+        [Authorize]
         // GET: HotelRatings/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -88,6 +92,7 @@ namespace HappyHotels.Controllers
             return View(hotelRating);
         }
 
+        [Authorize]
         // POST: HotelRatings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
