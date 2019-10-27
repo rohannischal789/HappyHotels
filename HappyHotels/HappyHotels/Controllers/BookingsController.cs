@@ -80,7 +80,7 @@ namespace HappyHotels.Controllers
             booking.hotelroom_id = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.room_id == booking.hotelroom_id).hotelroom_id; // updating the hotelroom_id as per the selected room id in hotel
 
             // if booking exists on the same day for the same room, booking constraint is shown
-            if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date == booking.check_in_date && b.check_out_date == booking.check_out_date))
+            if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && (b.check_in_date <= booking.check_in_date && b.check_out_date >= booking.check_in_date)))
             {
                 ViewBag.error = true;
             }
@@ -135,7 +135,7 @@ namespace HappyHotels.Controllers
             booking.hotelroom_id = db.HotelRooms.FirstOrDefault(h => h.hotel_id == hotelID && h.room_id == booking.hotelroom_id).hotelroom_id; // updating the hotelroom_id as per the selected room id in hotel
 
             // if booking exists on the same day for the same room (apart from the current booking id), booking constraint is shown
-            if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date == booking.check_in_date && b.check_out_date == booking.check_out_date && b.booking_id != booking.booking_id))
+            if (db.Bookings.Any(b => b.hotelroom_id == booking.hotelroom_id && b.check_in_date <= booking.check_in_date && b.check_out_date >= booking.check_in_date && b.booking_id != booking.booking_id))
             {
                 ViewBag.error = true;
             }
