@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Amenities">
+      <EntityTypeMapping TypeName="Model.Amenity">
+        <MappingFragment StoreEntitySet="Amenity">
+          <ScalarProperty Name="amenity_id" ColumnName="amenity_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="Model.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="booking_id" ColumnName="booking_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="hotelroom_id" ColumnName="hotelroom_id" />
+          <ScalarProperty Name="check_in_date" ColumnName="check_in_date" />
+          <ScalarProperty Name="check_out_date" ColumnName="check_out_date" />
+          <ScalarProperty Name="no_of_adults" ColumnName="no_of_adults" />
+          <ScalarProperty Name="no_of_children" ColumnName="no_of_children" />
+          <ScalarProperty Name="total_price" ColumnName="total_price" />
+          <ScalarProperty Name="coupon_id" ColumnName="coupon_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Coupons">
+      <EntityTypeMapping TypeName="Model.Coupon">
+        <MappingFragment StoreEntitySet="Coupon">
+          <ScalarProperty Name="coupon_id" ColumnName="coupon_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="coupon_code" ColumnName="coupon_code" />
+          <ScalarProperty Name="use_limit" ColumnName="use_limit" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="Model.Hotel">
+        <MappingFragment StoreEntitySet="Hotel">
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="postcode" ColumnName="postcode" />
+          <ScalarProperty Name="check_in_time" ColumnName="check_in_time" />
+          <ScalarProperty Name="check_out_time" ColumnName="check_out_time" />
+          <ScalarProperty Name="lattitude" ColumnName="lattitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelAmenities">
+      <EntityTypeMapping TypeName="Model.HotelAmenity">
+        <MappingFragment StoreEntitySet="HotelAmenities">
+          <ScalarProperty Name="hotelamenities_id" ColumnName="hotelamenities_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="amenity_id" ColumnName="amenity_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelContacts">
+      <EntityTypeMapping TypeName="Model.HotelContact">
+        <MappingFragment StoreEntitySet="HotelContact">
+          <ScalarProperty Name="hotelcontact_id" ColumnName="hotelcontact_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelLandmarks">
+      <EntityTypeMapping TypeName="Model.HotelLandmark">
+        <MappingFragment StoreEntitySet="HotelLandmark">
+          <ScalarProperty Name="hotellandmark_id" ColumnName="hotellandmark_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="landmark_id" ColumnName="landmark_id" />
+          <ScalarProperty Name="distance" ColumnName="distance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelPhotoes">
+      <EntityTypeMapping TypeName="Model.HotelPhoto">
+        <MappingFragment StoreEntitySet="HotelPhoto">
+          <ScalarProperty Name="hotelphoto_id" ColumnName="hotelphoto_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="photo_link" ColumnName="photo_link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelRatings">
+      <EntityTypeMapping TypeName="Model.HotelRating">
+        <MappingFragment StoreEntitySet="HotelRating">
+          <ScalarProperty Name="hotelrating_id" ColumnName="hotelrating_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="review" ColumnName="review" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelRooms">
+      <EntityTypeMapping TypeName="Model.HotelRoom">
+        <MappingFragment StoreEntitySet="HotelRoom">
+          <ScalarProperty Name="hotelroom_id" ColumnName="hotelroom_id" />
+          <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="photo_link" ColumnName="photo_link" />
+          <ScalarProperty Name="approx_price" ColumnName="approx_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Landmarks">
+      <EntityTypeMapping TypeName="Model.Landmark">
+        <MappingFragment StoreEntitySet="Landmark">
+          <ScalarProperty Name="landmark_id" ColumnName="landmark_id" />
+          <ScalarProperty Name="landmark_name" ColumnName="landmark_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="Model.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="room_id" ColumnName="room_id" />
+          <ScalarProperty Name="room_name" ColumnName="room_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

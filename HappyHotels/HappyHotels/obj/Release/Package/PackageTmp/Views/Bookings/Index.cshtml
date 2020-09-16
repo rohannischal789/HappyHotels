@@ -1,0 +1,82 @@
+﻿@model IEnumerable<HappyHotels.Models.Booking>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HotelRoom.Hotel.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HotelRoom.Room.room_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.check_in_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.check_out_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_adults)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_children)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total_price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelRoom.Hotel.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelRoom.Room.room_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.check_in_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.check_out_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_adults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_children)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.booking_id }) <br />
+                @Html.ActionLink("Edit", "Edit", new { id = item.booking_id }) <br />
+                @Html.ActionLink("Delete", "Delete", new { id = item.booking_id })
+            </td>
+        </tr>
+        }
+        </tbody>
+
+</table>
+@section Scripts {
+
+    @Scripts.Render("~/bundles/datatable")
+    <script>
+            $(document).ready(function () {
+                $('.table').DataTable();
+            });
+    </script>
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+      rel="stylesheet" />

@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Amenity">
+    <Key>
+      <PropertyRef Name="amenity_id" />
+    </Key>
+    <Property Name="amenity_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="booking_id" />
+    </Key>
+    <Property Name="booking_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="hotelroom_id" Type="int" Nullable="false" />
+    <Property Name="check_in_date" Type="date" Nullable="false" />
+    <Property Name="check_out_date" Type="date" Nullable="false" />
+    <Property Name="no_of_adults" Type="int" Nullable="false" />
+    <Property Name="no_of_children" Type="int" Nullable="false" />
+    <Property Name="total_price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+    <Property Name="coupon_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Coupon">
+    <Key>
+      <PropertyRef Name="coupon_id" />
+    </Key>
+    <Property Name="coupon_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" />
+    <Property Name="coupon_code" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="use_limit" Type="int" Nullable="false" />
+    <Property Name="expiry_date" Type="date" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="hotel_id" />
+    </Key>
+    <Property Name="hotel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="state" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="postcode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="check_in_time" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="check_out_time" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="lattitude" Type="decimal" Precision="10" Scale="6" />
+    <Property Name="longitude" Type="decimal" Precision="10" Scale="6" />
+    <Property Name="rating" Type="int" />
+  </EntityType>
+  <EntityType Name="HotelAmenities">
+    <Key>
+      <PropertyRef Name="hotelamenities_id" />
+    </Key>
+    <Property Name="hotelamenities_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="amenity_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HotelContact">
+    <Key>
+      <PropertyRef Name="hotelcontact_id" />
+    </Key>
+    <Property Name="hotelcontact_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="contact_no" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HotelLandmark">
+    <Key>
+      <PropertyRef Name="hotellandmark_id" />
+    </Key>
+    <Property Name="hotellandmark_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="landmark_id" Type="int" Nullable="false" />
+    <Property Name="distance" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HotelPhoto">
+    <Key>
+      <PropertyRef Name="hotelphoto_id" />
+    </Key>
+    <Property Name="hotelphoto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="photo_link" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HotelRating">
+    <Key>
+      <PropertyRef Name="hotelrating_id" />
+    </Key>
+    <Property Name="hotelrating_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="rating" Type="decimal" Precision="2" Scale="1" Nullable="false" />
+    <Property Name="review" Type="nvarchar(max)" />
+    <Property Name="user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HotelRoom">
+    <Key>
+      <PropertyRef Name="hotelroom_id" />
+    </Key>
+    <Property Name="hotelroom_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hotel_id" Type="int" Nullable="false" />
+    <Property Name="room_id" Type="int" Nullable="false" />
+    <Property Name="photo_link" Type="nvarchar" MaxLength="500" />
+    <Property Name="approx_price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Landmark">
+    <Key>
+      <PropertyRef Name="landmark_id" />
+    </Key>
+    <Property Name="landmark_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="landmark_name" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="room_name" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Booking__coupon___693CA210">
+    <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coupon">
+        <PropertyRef Name="coupon_id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="coupon_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__hotelro__6754599E">
+    <End Role="HotelRoom" Type="Self.HotelRoom" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelRoom">
+        <PropertyRef Name="hotelroom_id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="hotelroom_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Coupon__hotel_id__6477ECF3">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="0..1" />
+    <End Role="Coupon" Type="Self.Coupon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="Coupon">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelAmen__ameni__5070F446">
+    <End Role="Amenity" Type="Self.Amenity" Multiplicity="1" />
+    <End Role="HotelAmenities" Type="Self.HotelAmenities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Amenity">
+        <PropertyRef Name="amenity_id" />
+      </Principal>
+      <Dependent Role="HotelAmenities">
+        <PropertyRef Name="amenity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelAmen__hotel__4F7CD00D">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelAmenities" Type="Self.HotelAmenities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelAmenities">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelCont__hotel__534D60F1">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelContact" Type="Self.HotelContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelContact">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelLand__hotel__60A75C0F">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelLandmark" Type="Self.HotelLandmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelLandmark">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelLand__landm__619B8048">
+    <End Role="Landmark" Type="Self.Landmark" Multiplicity="1" />
+    <End Role="HotelLandmark" Type="Self.HotelLandmark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Landmark">
+        <PropertyRef Name="landmark_id" />
+      </Principal>
+      <Dependent Role="HotelLandmark">
+        <PropertyRef Name="landmark_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelPhot__hotel__5629CD9C">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelPhoto" Type="Self.HotelPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelPhoto">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelRati__hotel__6C190EBB">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelRating" Type="Self.HotelRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelRating">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelRoom__hotel__5CD6CB2B">
+    <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+    <End Role="HotelRoom" Type="Self.HotelRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="hotel_id" />
+      </Principal>
+      <Dependent Role="HotelRoom">
+        <PropertyRef Name="hotel_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HotelRoom__room___5DCAEF64">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="HotelRoom" Type="Self.HotelRoom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="room_id" />
+      </Principal>
+      <Dependent Role="HotelRoom">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Amenity" EntityType="Self.Amenity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelAmenities" EntityType="Self.HotelAmenities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelContact" EntityType="Self.HotelContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelLandmark" EntityType="Self.HotelLandmark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelPhoto" EntityType="Self.HotelPhoto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelRating" EntityType="Self.HotelRating" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelRoom" EntityType="Self.HotelRoom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Landmark" EntityType="Self.Landmark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Booking__coupon___693CA210" Association="Self.FK__Booking__coupon___693CA210">
+      <End Role="Coupon" EntitySet="Coupon" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__hotelro__6754599E" Association="Self.FK__Booking__hotelro__6754599E">
+      <End Role="HotelRoom" EntitySet="HotelRoom" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Coupon__hotel_id__6477ECF3" Association="Self.FK__Coupon__hotel_id__6477ECF3">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="Coupon" EntitySet="Coupon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelAmen__ameni__5070F446" Association="Self.FK__HotelAmen__ameni__5070F446">
+      <End Role="Amenity" EntitySet="Amenity" />
+      <End Role="HotelAmenities" EntitySet="HotelAmenities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelAmen__hotel__4F7CD00D" Association="Self.FK__HotelAmen__hotel__4F7CD00D">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelAmenities" EntitySet="HotelAmenities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelCont__hotel__534D60F1" Association="Self.FK__HotelCont__hotel__534D60F1">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelContact" EntitySet="HotelContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelLand__hotel__60A75C0F" Association="Self.FK__HotelLand__hotel__60A75C0F">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelLandmark" EntitySet="HotelLandmark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelLand__landm__619B8048" Association="Self.FK__HotelLand__landm__619B8048">
+      <End Role="Landmark" EntitySet="Landmark" />
+      <End Role="HotelLandmark" EntitySet="HotelLandmark" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelPhot__hotel__5629CD9C" Association="Self.FK__HotelPhot__hotel__5629CD9C">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelPhoto" EntitySet="HotelPhoto" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelRati__hotel__6C190EBB" Association="Self.FK__HotelRati__hotel__6C190EBB">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelRating" EntitySet="HotelRating" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelRoom__hotel__5CD6CB2B" Association="Self.FK__HotelRoom__hotel__5CD6CB2B">
+      <End Role="Hotel" EntitySet="Hotel" />
+      <End Role="HotelRoom" EntitySet="HotelRoom" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HotelRoom__room___5DCAEF64" Association="Self.FK__HotelRoom__room___5DCAEF64">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="HotelRoom" EntitySet="HotelRoom" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

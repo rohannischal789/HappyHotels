@@ -10,7 +10,7 @@ namespace HappyHotels.Utils
 {
     public class EmailSender
     {
-        private const String API_KEY = "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";
+        private const String API_KEY = "xxxx";
 
         public void Send(List<string> toEmails, String subject, String contents, HttpPostedFileBase attachment)
         {

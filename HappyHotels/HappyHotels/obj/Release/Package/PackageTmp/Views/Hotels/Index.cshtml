@@ -1,0 +1,103 @@
+﻿@model IEnumerable<HappyHotels.Models.Hotel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.city)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.state)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.rating)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.postcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.check_in_time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.check_out_time)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.postcode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.check_in_time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.check_out_time)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.hotel_id })
+                    <br />
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id }) <br />
+                        @Html.ActionLink("Delete", "Delete", new { id = item.hotel_id })
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/datatable")
+        <script>
+            $(document).ready(function () {
+                $('.table').DataTable();
+            });
+        </script>
+    }
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css"
+          rel="stylesheet" />
